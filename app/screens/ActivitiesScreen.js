@@ -19,7 +19,7 @@ function ActivitiesScreen({ navigation }) {
   useEffect(() => {
     loadActivities();
   }, []);
-
+  console.log(activities[0]);
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -33,10 +33,10 @@ function ActivitiesScreen({ navigation }) {
         <FlatList
           data={activities}
           keyExtractor={(activity) => activity.id}
-          renderItem={(activity) => (
+          renderItem={({ item }) => (
             <Card
-              title={activity.id}
-              subTitle={activity.activity_type}
+              title={item.name}
+              subTitle={item.activity_type}
               // onPress={() => navigation.navigate(routes.ACTIVITY_DETAILS, item)}
               // thumbnailUrl={item.images[0].thumbnailUrl}
             />
