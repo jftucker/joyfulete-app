@@ -13,18 +13,18 @@ function ActivityDetailsScreen({ route }) {
       behavior="position"
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
     >
-      <Image
+      {/* <Image
         style={styles.image}
         preview={{ uri: activity.images[0].thumbnailUrl }}
         uri={activity.images[0].url}
-      />
+      /> */}
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{activity.title}</Text>
-        <Text style={styles.price}>{activity.price}</Text>
+        <Text style={styles.name}>{activity.name}</Text>
+        <Text style={styles.description}>{activity.description}</Text>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/john.jpg")}
-            title="John Tucker"
+            title={activity.user}
             subTitle="5 Listings"
           />
         </View>
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 300,
   },
-  price: {
+  description: {
     color: colors.secondary,
     fontWeight: "bold",
     fontSize: 20,
     marginVertical: 10,
   },
-  title: {
+  name: {
     fontSize: 24,
     fontWeight: "500",
   },

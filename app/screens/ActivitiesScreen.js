@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import Button from "../components/Button";
-import Card from "../components/Card";
+import ActivityCard from "../components/ActivityCard";
 import colors from "../config/colors";
 import activitiesApi from "../api/activities";
 import Screen from "../components/Screen";
@@ -19,7 +19,7 @@ function ActivitiesScreen({ navigation }) {
   useEffect(() => {
     loadActivities();
   }, []);
-  console.log(activities[0]);
+
   return (
     <>
       <ActivityIndicator visible={loading} />
@@ -34,11 +34,15 @@ function ActivitiesScreen({ navigation }) {
           data={activities}
           keyExtractor={(activity) => activity.id}
           renderItem={({ item }) => (
-            <Card
+            <ActivityCard
+              date={item.date}
+              type={item.activity_type}
               title={item.name}
-              subTitle={item.activity_type}
-              // onPress={() => navigation.navigate(routes.ACTIVITY_DETAILS, item)}
-              // thumbnailUrl={item.images[0].thumbnailUrl}
+              user={item.user}
+              subTitle={item.description}
+              imageUrl={"../assets/map.jpg"}
+              onPress={() => navigation.navigate(routes.ACTIVITY_DETAILS, item)}
+              thumbnailUrl={"../assets/map.jpg"}
             />
           )}
         />
@@ -49,7 +53,7 @@ function ActivitiesScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    paddingHorizontal: 5,
     backgroundColor: colors.light,
   },
 });

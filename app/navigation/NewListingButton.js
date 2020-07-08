@@ -29,9 +29,14 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     borderRadius: 40,
     borderWidth: 10,
-    bottom: 20,
+    bottom: 30,
     height: 80,
     width: 80,
+    shadowColor: "rgba(0,0,0, .4)", // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS
+    elevation: 3, // Android
   },
 });
 

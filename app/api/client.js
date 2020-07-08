@@ -20,10 +20,16 @@ apiClient.get = async (url, params, axiosConfig) => {
 
   if (jwtDecode(accessToken).exp < Date.now() / 1000) {
     const refresh = await authStorage.getRefreshToken();
-    const newAccessToken = await apiClient.post(settings.refreshEndpoint, {
+    if (jwtDecode(refresh).exp < Date.now() / 1000) {
+      authStorage.removeTokens();
+      return;
+    }
+
+    const { data } = await apiClient.post(settings.refreshEndpoint, {
       refresh,
     });
-    authStorage.storeAccessToken(newAccessToken.data.access);
+    authStorage.storeAccessToken(data.access);
+    authStorage.storeRefreshToken(data.refresh);
   }
 
   const response = await get(url, params, axiosConfig);
