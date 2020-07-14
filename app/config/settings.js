@@ -6,11 +6,11 @@ const settings = {
     refreshEndpoint: "token/refresh/",
   },
   staging: {
-    apiUrl: "http://10.0.0.146:9000/api",
+    apiUrl: "https://api.joyfulete.com/api/v1/",
     refreshEndpoint: "token/refresh/",
   },
   prod: {
-    apiUrl: "http://10.0.0.146:9000/api",
+    apiUrl: "https://api.joyfulete.com/api/v1/",
     refreshEndpoint: "token/refresh/",
   },
 };
