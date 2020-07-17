@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import AccountNavigator from "./AccountNavigator";
 import FeedNavigator from "./FeedNavigator";
-import ActivityEditScreen from "../screens/ActivityEditScreen";
+import ActivityRecordScreen from "../screens/ActivityRecordScreen";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 import useNotifications from "../hooks/useNotifications";
@@ -27,12 +27,12 @@ const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="ActivityEdit"
-        component={ActivityEditScreen}
+        name="ActivityRecord"
+        component={ActivityRecordScreen}
         options={({ navigation }) => ({
           tabBarButton: () => (
             <NewListingButton
-              onPress={() => navigation.navigate(routes.ACTIVITY_EDIT)}
+              onPress={() => navigation.navigate(routes.ACTIVITY_RECORD)}
             />
           ),
           tabBarIcon: ({ color, size }) => (

@@ -16,7 +16,6 @@ import useApi from "../hooks/useApi";
 import ActivityIndicator from "../components/ActivityIndicator";
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
 });
@@ -27,8 +26,12 @@ function RegisterScreen() {
   const auth = useAuth();
   const [error, setError] = useState();
 
-  const handleSubmit = async (userInfo) => {
-    const result = await registerApi.request(userInfo);
+  const handleSubmit = async ({ email, password }) => {
+    const result = await registerApi.request({
+      email: email,
+      password1: password,
+      password2: password,
+    });
 
     if (!result.ok) {
       if (result.data) {
@@ -40,10 +43,7 @@ function RegisterScreen() {
       return;
     }
 
-    const { data: authToken } = await loginApi.request(
-      userInfo.email,
-      userInfo.password
-    );
+    const { data: authToken } = await loginApi.request(email, password);
     auth.logIn(authToken);
   };
 
@@ -52,17 +52,11 @@ function RegisterScreen() {
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container}>
         <Form
-          initialValues={{ name: "", email: "", password: "" }}
+          initialValues={{ email: "", password: "" }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           <ErrorMessage error={error} visible={error} />
-          <FormField
-            autoCorrect={false}
-            icon="account"
-            name="name"
-            placeholder="Name"
-          />
           <FormField
             autoCapitalize="none"
             autoCorrect={false}
