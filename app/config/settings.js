@@ -2,7 +2,7 @@ import Constants from "expo-constants";
 
 const settings = {
   dev: {
-    apiUrl: "http://10.0.0.146:8000/api/v1/",
+    apiUrl: "http://10.0.0.13:8000/api/v1/",
     refreshEndpoint: "token/refresh/",
   },
   staging: {
